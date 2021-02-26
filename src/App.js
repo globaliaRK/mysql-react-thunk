@@ -9,7 +9,7 @@ import SelactionBox from './components/SelactionBox';
 
 function App(props) {
 
-  const [selectDate, setSelectDate] = useState("");
+  const [selectDate, setSelectDate] = useState("all");
   const [dates, setDates] = useState([]);
 
   useEffect(() => {

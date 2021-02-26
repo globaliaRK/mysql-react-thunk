@@ -6,7 +6,8 @@ export const fetchDates = (date) => dispatch => _fetchDates(date, dispatch);
 
 const _fetchDates = _.memoize(async (date, dispatch) => {
 
+    console.log(date);
+    const { data } = await employeeAPI.get("", { params: { date } });
 
-    const { data } = await employeeAPI.get();
     dispatch({ type: "FETCH_DATES", payload: data });
 });

@@ -38,7 +38,7 @@ const SelactionBox = ({ selectDate, setSelectDate, values }) => {
                     id: 'age-native-simple',
                 }}
             >
-                <option value="all" selected>All Records</option>
+                <option value="all">All Records</option>
                 {options(values)}
             </Select>
         </FormControl>

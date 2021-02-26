@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import EmployeeTable from './components/EmployeeTable';
+import { fetchDates } from "./actions";
 
-function App() {
+import SelactionBox from './components/SelactionBox';
+
+
+
+function App(props) {
+
+  const [selectDate, setSelectDate] = useState("");
+  const [dates, setDates] = useState([]);
+
+  useEffect(() => {
+    props.fetchDates(selectDate);
+    setDates(props.dates);
+  });
+
+  useEffect(() => {
+    props.fetchDates(selectDate);
+  }, [selectDate]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="col-8 mx-auto">
+        <SelactionBox values={dates} selectDate={selectDate} setSelectDate={setSelectDate} />
+        <EmployeeTable value={dates} rows='1' columns="2" pageSize={5} checkboxSelection />
+      </div>
     </div>
   );
 }
 
-export default App;
+
+
+const mapStateToProps = (state) => {
+  return {
+    dates: state.dates
+  }
+}
+
+export default connect(mapStateToProps, { fetchDates })(App);
